@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <title>Admin</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Bootstrap project</a>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="/logout?">Logout</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 p-3 ">
+            <div>
+                <a class="btn btn-outline-primary  btn-block" href="/user">User</a>
+            </div>
+            <div>
+                <a class="btn btn-outline-primary  btn-block mt-2" href="/admin">Admin</a>
+            </div>
+        </div>
+
+
+        <div class="col-10 p-3 mb-2 bg-light text-dark">
+            <h4> Admin panel </h4>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                       aria-controls="home"
+                       aria-selected="true">Users table</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                       aria-controls="profile"
+                       aria-selected="false">New user</a>
+                </li>
+            </ul>
+
+
+<!--            <div class="tab-content">-->
+<!--                <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">-->
+
+<!--                    <table id="tableUser" class="table">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th scope="col">ID</th>-->
+<!--                            <th scope="col">User Name</th>-->
+<!--                            <th scope="col">User Login</th>-->
+<!--                            <th scope="col">User Role</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody></tbody>-->
+            <div class="tab-content">
+                <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <!--                    table-striped-->
+                    <table id="tableUsers" class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Login</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">User Role</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+<!--                //////////-->
+
+                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="col-4 mx-auto">
+                        <!--                        <form id="newUser" method="post">-->
+
+                        <form action="/rest/admin/save/" method="POST" onsubmit="return saveUser(this)">
+                            <label class="d-flex justify-content-center" for="name"><strong>Username</strong></label>
+                            <input class="form-control form-control-lg" type="text" id="name" placeholder="name"
+                                   name="name">
+
+                            <label class="d-flex justify-content-center" for="login"><strong>Login</strong></label>
+                            <input class="form-control form-control-lg" type="text" id="login" placeholder="login"
+                                   name="login">
+
+                            <label class="d-flex justify-content-center"
+                                   for="password"><strong>Password</strong></label>
+                            <input class="form-control form-control-lg" type="text" id="password" placeholder="password"
+                                   name="password">
+
+                            <div class="d-flex justify-content-center pt-2">
+                                <select class="btn btn-secondary dropdown-toggle" name="role">
+                                    <option>USER</option>
+                                    <option>ADMIN</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-center pt-2">
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Add"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">-->
+<!--                    <div class="col-4 mx-auto">-->
+<!--                        <form id="newUser" method="post">-->
+
+<!--                            <label class="d-flex justify-content-center" for="name"><strong>Username</strong></label>-->
+<!--                            <input class="form-control form-control-lg" type="text" id="name" placeholder="name"-->
+<!--                                   name="name">-->
+
+<!--                            <label class="d-flex justify-content-center" for="login"><strong>Login</strong></label>-->
+<!--                            <input class="form-control form-control-lg" type="text" id="login" placeholder="login"-->
+<!--                                   name="login">-->
+
+<!--                            <label class="d-flex justify-content-center"-->
+<!--                                   for="password"><strong>Password</strong></label>-->
+<!--                            <input class="form-control form-control-lg" type="text" id="password" placeholder="password"-->
+<!--                                   name="password">-->
+
+<!--                            <div class="d-flex justify-content-center pt-2">-->
+<!--                                <select class="btn btn-secondary dropdown-toggle" name="role">-->
+<!--                                    <option>USER</option>-->
+<!--                                    <option>ADMIN</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+
+<!--                            <div class="d-flex justify-content-center pt-2">-->
+<!--                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Add"/>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/js/tableUser.js"></script>
+
+
+</body>
+</html>
